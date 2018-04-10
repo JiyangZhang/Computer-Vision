@@ -1,5 +1,5 @@
 % add three kinds of noise to lena
-lena = imread('D:\±±º½\Ñ§Ï°\´óÈıÏÂ\Í¼Ïñ´¦ÀíÓë»úÆ÷ÊÓ¾õ\ÊµÑé\ÊµÑéÒ»\lena.bmp');  
+lena = imread('D:\åŒ—èˆª\å­¦ä¹ \å¤§ä¸‰ä¸‹\å›¾åƒå¤„ç†ä¸æœºå™¨è§†è§‰\å®éªŒ\å®éªŒä¸€\lena.bmp');  
 % read the lena image
 [M, N, Z] = size(lena);
 
@@ -20,9 +20,9 @@ end
 % add random impulse noise to the image
 
 figure;
-subplot(2,2,1); imshow(lena); title('Ô­Í¼Ïñ');
-subplot(2,2,2); imshow(J1); title('¼ÓÈë½·ÑÎÔëÉù');
-subplot(2,2,3); imshow(J2); title('¼ÓÈë¸ßË¹ÔëÉù');
-subplot(2,2,4); imshow(J3); title('¼ÓÈëËæ»úÔëÉù');
+subplot(2,2,1); imshow(lena); title('åŸå›¾åƒ');
+subplot(2,2,2); imshow(J1); title('åŠ å…¥æ¤’ç›å™ªå£°');
+subplot(2,2,3); imshow(J2); title('åŠ å…¥é«˜æ–¯å™ªå£°');
+subplot(2,2,4); imshow(J3); title('åŠ å…¥éšæœºå™ªå£°');
 
 
