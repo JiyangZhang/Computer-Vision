@@ -1,4 +1,4 @@
-img = imread('D:\北航\学习\大三下\图像处理与机器视觉\实验\实验三\lena.bmp');
+img = imread('D:\鍖楄埅\瀛︿範\澶т笁涓媆鍥惧儚澶勭悊涓庢満鍣ㄨ瑙塡瀹為獙\瀹為獙涓塡lena.bmp');
 [m, n] = size(img);
 x = 1:m; y = 1:n;
 A = meshgrid(x,y);
