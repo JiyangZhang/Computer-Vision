@@ -1,16 +1,16 @@
 % imread the picture
-i = imread('D:\±±º½\Ñ§Ï°\´óÈıÏÂ\Í¼Ïñ´¦ÀíÓë»úÆ÷ÊÓ¾õ\ÊµÑé\ÊµÑéËÄ\cell2.BMP');
+i = imread('D:\åŒ—èˆª\å­¦ä¹ \å¤§ä¸‰ä¸‹\å›¾åƒå¤„ç†ä¸æœºå™¨è§†è§‰\å®éªŒ\å®éªŒå››\cell2.BMP');
 img = rgb2gray(i);
-% ÖĞÖµÂË²¨
+% ä¸­å€¼æ»¤æ³¢
 h=fspecial('average',[4,4]);     % create a 3*3 predifined average filter
 img1 = imfilter(img, h);
-% ¾ùÖµÂË²¨
+% å‡å€¼æ»¤æ³¢
 img2 = medfilt2(img,[3 3]);   % median filter
-% ĞÎÌ¬Ñ§ÂË²¨
-% ¿ªÔËËã
+% å½¢æ€å­¦æ»¤æ³¢
+% å¼€è¿ç®—
 se = strel('disk',2);   
 img3 = imopen(img, se);
-% ±ÕÔËËãa
+% é—­è¿ç®—a
 img4 = imclose(img, se);
 % imshow(img3);
 
@@ -19,8 +19,8 @@ img4 = imclose(img, se);
 level = graythresh(img4);  
 a=~im2bw(img4,level);  
 
-cc = bwconncomp(a); %·µ»ØÁ¬Í¨Óò½á¹¹
-[L, NUM] = bwlabel(a,8);%±êÖ¾¶şÖµÍ¼ÖĞÁ¬Í¨Óò
+cc = bwconncomp(a); %è¿”å›è¿é€šåŸŸç»“æ„
+[L, NUM] = bwlabel(a,8);%æ ‡å¿—äºŒå€¼å›¾ä¸­è¿é€šåŸŸ
 
 list1 = zeros(1, NUM);
 list2 = zeros(1, NUM);
@@ -50,8 +50,8 @@ img4(l) = 255;
 level = graythresh(img4);  
 a=~im2bw(img4,level);  
 
-cc = bwconncomp(a); %·µ»ØÁ¬Í¨Óò½á¹¹
-[L, NUM] = bwlabel(a,8);%±êÖ¾¶şÖµÍ¼ÖĞÁ¬Í¨Óò
+cc = bwconncomp(a); %è¿”å›è¿é€šåŸŸç»“æ„
+[L, NUM] = bwlabel(a,8);%æ ‡å¿—äºŒå€¼å›¾ä¸­è¿é€šåŸŸ
 s = regionprops(L,'centroid');
 centroids = cat(1, s.Centroid);
 imshow(img4,[]);hold on;
