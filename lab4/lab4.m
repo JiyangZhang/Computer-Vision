@@ -1,16 +1,16 @@
 % imread the picture
-i = imread('D:\åŒ—èˆª\å­¦ä¹ \å¤§ä¸‰ä¸‹\å›¾åƒå¤„ç†ä¸æœºå™¨è§†è§‰\å®éªŒ\å®éªŒå››\cell2.BMP');
+i = imread('D:\±±º½\Ñ§Ï°\´óÈıÏÂ\Í¼Ïñ´¦ÀíÓë»úÆ÷ÊÓ¾õ\ÊµÑé\ÊµÑéËÄ\cell2.BMP');
 img = rgb2gray(i);
-% ä¸­å€¼æ»¤æ³¢
+% ÖĞÖµÂË²¨
 h=fspecial('average',[4,4]);     % create a 3*3 predifined average filter
 img1 = imfilter(img, h);
-% å‡å€¼æ»¤æ³¢
+% ¾ùÖµÂË²¨
 img2 = medfilt2(img,[3 3]);   % median filter
-% å½¢æ€å­¦æ»¤æ³¢
-% å¼€è¿ç®—
+% ĞÎÌ¬Ñ§ÂË²¨
+% ¿ªÔËËã
 se = strel('disk',2);   
 img3 = imopen(img, se);
-% é—­è¿ç®—a
+% ±ÕÔËËãa
 img4 = imclose(img, se);
 % imshow(img3);
 
@@ -19,8 +19,9 @@ img4 = imclose(img, se);
 level = graythresh(img4);  
 a=~im2bw(img4,level);  
 
-cc = bwconncomp(a); %è¿”å›è¿é€šåŸŸç»“æ„
-[L, NUM] = bwlabel(a,8);%æ ‡å¿—äºŒå€¼å›¾ä¸­è¿é€šåŸŸ
+
+cc = bwconncomp(a); %·µ»ØÁ¬Í¨Óò½á¹¹
+[L, NUM] = bwlabel(a,8);%±êÖ¾¶şÖµÍ¼ÖĞÁ¬Í¨Óò
 
 list1 = zeros(1, NUM);
 list2 = zeros(1, NUM);
@@ -45,38 +46,42 @@ end
 l = logical(im2bw(L));
 l =~l;
 img4(l) = 255;
-
+%subplot(121);imshow(img4);
 % OSTU
 level = graythresh(img4);  
 a=~im2bw(img4,level);  
 
-cc = bwconncomp(a); %è¿”å›è¿é€šåŸŸç»“æ„
-[L, NUM] = bwlabel(a,8);%æ ‡å¿—äºŒå€¼å›¾ä¸­è¿é€šåŸŸ
+cc = bwconncomp(a); %·µ»ØÁ¬Í¨Óò½á¹¹
+[L, NUM] = bwlabel(a,8);%±êÖ¾¶şÖµÍ¼ÖĞÁ¬Í¨Óò
 s = regionprops(L,'centroid');
 centroids = cat(1, s.Centroid);
-imshow(img4,[]);hold on;
+imshow(img4);hold on;
 
 
 for i = 1 : size(centroids, 1)
     str = num2str(i);
-    text(centroids(i, 1), centroids(i, 2), str, 'Color', 'Blue', 'Fontsize', 13, 'HorizontalAlignment', 'right');
+    text(centroids(i, 1), centroids(i, 2), str, 'Color', 'White', 'Fontsize', 13, 'HorizontalAlignment', 'center');
 end
 
+pic = zeros(size(L));
 coreArea = zeros(1,15);
 cysArea = zeros(1,15);
 proportion = zeros(1,15);
 for i = 1 : cc.NumObjects
-    threshold = graythresh(img4(L == i));
-    pic1 = zeros(size(L)) + (im2bw(img4, threshold) == 0) .* (L == i);
+    threshold = graythresh(img4(L == i))-20/256;
+%     threshold = graythresh(img4(L == i));
+    pic1 = (im2bw(img4, threshold) == 0) .* (L == i);
+    pic = pic + pic1;
     label = logical(pic1);
     STATS = regionprops(label,'area');
     corearea = STATS.Area;  % the area of core
     coreArea(1,i) = corearea;
-    %pic2 = zeros(size(L)) + (im2bw(img4, threshold) == 1).*(L == i)+ pic1;
-    label = logical(a);
+    pic2 = a.*(L == i);
+    label = logical(pic2);
     STATS = regionprops(label,'area');
     cysarea = STATS.Area;  % the area of cell
     cysArea(1,i) = cysarea;
     proportion(1,i) = corearea/cysarea;
 end
-
+% ÌáÈ¡ËùÓĞÏ¸°ûºËµÄÍ¼Æ¬
+imshow(pic);
