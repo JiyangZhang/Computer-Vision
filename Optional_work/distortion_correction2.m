@@ -29,7 +29,7 @@ for i=1:1
     pos(i,1) = 1;
     for j=2:2*n
         d = subs(h,pos(i,j-1));
-        pos(i,j) = pos(i,j-1) + d; % ¶ÔÓ¦»û±äÍ¼ÏñÉÏµÄ×ø±ê
+        pos(i,j) = pos(i,j-1) + d; % Â¶Ã”Ã“Â¦Â»Ã»Â±Ã¤ÃÂ¼ÃÃ±Ã‰ÃÂµÃ„Ã—Ã¸Â±Ãª
         fprintf('collum is:%d\n', j);
         if pos(i,j) >= stopos
             fprintf('the pos is:%f', pos(i,j));
