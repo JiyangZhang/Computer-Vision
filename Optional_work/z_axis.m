@@ -7,7 +7,7 @@ z = ones(1,n)*b;
 for i=1:a
     z(1,i) = subs(h,i);
     if mod(i,200) == 0
-        fprintf('colum number:%d\n', i);
+        fprintf('column number:%d\n', i);
     end
 end
 
